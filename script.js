@@ -1,4 +1,3 @@
-//your JS code here. If required.
 const sounds = [
   "applause",
   "boo",
@@ -10,35 +9,32 @@ const sounds = [
 
 const buttons = document.getElementById("buttons");
 
-let currentAudio = null;
+// Create a single audio element in the DOM
+const audio = document.createElement("audio");
+document.body.appendChild(audio);
 
 sounds.forEach(sound => {
-  const button = document.createElement("button");
-  button.className = "btn";
-  button.innerText = sound;
+  const btn = document.createElement("button");
+  btn.className = "btn";
+  btn.innerText = sound;
 
-  button.addEventListener("click", () => {
-    if (currentAudio) {
-      currentAudio.pause();
-      currentAudio.currentTime = 0;
-    }
-
-    currentAudio = new Audio(`sounds/${sound}.mp3`);
-    currentAudio.play();
+  btn.addEventListener("click", () => {
+    audio.pause();
+    audio.currentTime = 0;
+    audio.src = `sounds/${sound}.mp3`;
+    audio.play();
   });
 
-  buttons.appendChild(button);
+  buttons.appendChild(btn);
 });
 
-const stopButton = document.createElement("button");
-stopButton.className = "stop";
-stopButton.innerText = "stop";
+const stopBtn = document.createElement("button");
+stopBtn.className = "stop";
+stopBtn.innerText = "stop";
 
-stopButton.addEventListener("click", () => {
-  if (currentAudio) {
-    currentAudio.pause();
-    currentAudio.currentTime = 0;
-  }
+stopBtn.addEventListener("click", () => {
+  audio.pause();
+  audio.currentTime = 0;
 });
 
-buttons.appendChild(stopButton);
+buttons.appendChild(stopBtn);
